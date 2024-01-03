@@ -1,14 +1,16 @@
+import categories from "@/constants/hero-section3-data";
 import React from "react";
 
 const Herosecton3 = () => {
   return (
     <>
-      <Category />
-      <Category hide={true} />
+    {categories.map((val,index)=>(
+    <Category item={val} hide={index==1?true:false} />
+    ))}
     </>
   );
 };
-const Category = ({hide}) => {
+const Category = ({hide,item}) => {
   return (
     <div className="w-full flex flex-col justify-center align-center m-20 gap-20 ">
       <div
@@ -17,14 +19,10 @@ const Category = ({hide}) => {
       >
         {!hide&&<h1 className="text-2xl text-black font-bold leadi sm:text-4xl text-center">Menu</h1>}
         <h1 className="text-2xl text-bold text-black text-center">
-          First category
+          {item.name}
         </h1>
         <p className="text-large text-bold text-black text-center">
-          Now in Manhattan Elevate your day with Grab and Go's Fresh Juices
-          where freshness meets outstanding flavor! Sip, savor, and supercharge
-          your senses. It's not just a drink; it's a liquid boost for your
-          superhero journey. Grab a bottle, seize the moment, and let our juices
-          be your secret weapon to conquer the day!
+          {item.description}
         </p>
       </div>
       <div
@@ -36,16 +34,18 @@ const Category = ({hide}) => {
           justifyContent: "space-around",
         }}
       >
-        <Card />
-        <Card />
-        <Card />
+       {
+        item.items?.map((val,index)=>(
+          <Card val={val} key={index}/>
+        ))
+       }
       </div>
     </div>
   );
 };
-const Card = () => {
+const Card = ({val}) => {
   return (
-    <section class="shadow rounded-3xl shadow w-[390px]">
+    <section class="shadow rounded-3xl lg:w-[390px] w-[270px] transition-transform duration-300 ease-in-out transform hover:shadow-lg hover:scale-105">
       <div class="lg:order-first">
         <div class="flex flex-col">
           <div class="p-8 rounded-3xl ring-1 ring-white/10 shadow-sm">
@@ -75,26 +75,20 @@ const Card = () => {
                     </clipPath>
                   </defs>
                 </svg>
-                <p class="text-neutral-800 font-semibold">First Item</p>
+                <p class="text-neutral-800 font-semibold">{val.name}</p>
               </div>
               <p>
                 <span class="text-lg font-medium text-neutral-800 uppercase lg:text-xl">
-                  $5
-                </span>
-                <span class="text-base font-medium ttext-neutral-700">
-                  {" "}
-                  /mo
+                  ${val?.price}
                 </span>
               </p>
             </div>
             <p class="mt-8 text-sm font-medium text-neutral-800">
-              Carrot, Orange, Ginger, and Turmeric. Crafted to awaken your taste
-              buds and nourish your body, this golden elixir Fresh Juices is a
-              refreshing journey through the sun-kissed fields of wellness.
+              {val.description}
             </p>
             <div class="flex mt-6">
               <a
-                class="items-center justify-between inline-flex w-full font-medium py-2.5 text-center text-neutral-800 duration-200 bg-white/5 border border-white/5 rounded-xl h-14 hover:bg-white/10 hover:border-white/10 focus:outline-none focus-visible:outline-black text-base focus-visible:ring-black"
+                class="items-center justify-between inline-flex w-full font-medium py-2.5 text-center text-neutral-800 duration-200 bg-white/5 border border-white/5 rounded-xl h-14 hover:bg-white/10 hover:border-white/10 focus:outline-none focus-visible:outline-black text-base focus-visible:ring-black hover:shadow hover:text-black hover:p-3"
                 href="#"
               >
                 Order now <span>→</span>

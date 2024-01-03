@@ -1,18 +1,19 @@
+import hero2Data from "@/constants/hero-section2-data";
 import React from "react";
 
 const Herosection2 = () => {
   return (
-    <div style={{ display: "flex", flexDirection: "column", width: "100vw",gap:20,background:"white",paddingBottom:40}}>
+    <div className="lg:w-[90vw] w-[100vw]" style={{ display: "flex", flexDirection: "column", gap:50,background:"white",paddingBottom:40}}>
       <h1 className="text-2xl text-black font-bold leadi sm:text-4xl text-center">GRAB AND GO</h1>
-      <div style={{ display: "flex", flexWrap: "wrap",justifyContent:"space-around" }}>
-        <Card />
-        <Card />
-        <Card />
+      <div style={{ display: "flex", flexWrap: "wrap",justifyContent:"space-around" }} className="lg:gap-0 gap-10">
+        {hero2Data.map((val)=>(
+          <Card val={val}/>
+        ))}
       </div>
     </div>
   );
 };
-const Card = () => {
+const Card = ({val}) => {
   return (
     <div
       style={{
@@ -25,14 +26,13 @@ const Card = () => {
       }}
     >
       <img
-        class="object-contain rounded-md h-72 sm:h-80 lg:h-120 xl:h-140 2xl:h-120"
-        src="hero-img.webp"
+        class=""
+        src={val.img}
         style={{borderRadius:"50%"}}
       />
-      <h2 className="text-2xl ttext-bold text-black">Our Concept</h2>
+      <h2 className="text-2xl ttext-bold text-black">{val.name}</h2>
       <p className="text-base text-center text-black">
-        Joq Cafe is a unique grab and go serving you Fresh Juices Vegan
-        Desserts.
+       {val.description}
       </p>
     </div>
   );

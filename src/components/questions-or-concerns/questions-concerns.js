@@ -13,9 +13,9 @@ const QuestionsOrConcerns = ({ images }) => {
   };
 
   return (
-    <div class="flex items-center justify-center p-12 w-full flex-col m-10 gap-20">
+    <div class="flex items-center justify-center lg:p-12 p-3 w-full flex-col m-10 gap-20">
         <div>
-        <h1 className='text-black text-4xl text-bold'>Questions or Concerns?</h1>
+        <h1 className='text-black text-4xl text-bold text-center'>Questions or Concerns?</h1>
         <h1 className='text-black text-2xl text-bold text-center'>Drop us a line !</h1>
         </div>
     <div class="mx-auto w-full max-w-[550px] bg-white">
@@ -165,7 +165,7 @@ const QuestionsOrConcerns = ({ images }) => {
   
         <div>
           <button
-            class="hover:shadow-form w-full rounded-md bg-[#6A64F1] py-3 px-8 text-center text-base font-semibold text-white outline-none"
+            class="hover:shadow-form w-full rounded-md bg-[black] py-3 px-8 text-center text-base font-semibold text-white outline-none"
           >
             Send
           </button>
