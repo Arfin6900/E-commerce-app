@@ -78,7 +78,7 @@ const Card = ({val}) => {
                 <p class="text-neutral-800 font-semibold">{val.name}</p>
               </div>
               <p>
-                <span class="text-lg font-medium text-neutral-800 uppercase lg:text-xl">
+                <span class="text-lg font-medium text-[#F36F1D] uppercase lg:text-xl">
                   ${val?.price}
                 </span>
               </p>

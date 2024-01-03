@@ -9,7 +9,7 @@ const Hero = () => {
 		</div>
 		<div class="flex flex-col justify-center p-6 text-center rounded-sm lg:max-w-md xl:max-w-lg lg:text-left">
 			<h1 class="text-2xl lg:text-end text-center font-bold leadi sm:text-4xl">Welcome to
-				<span class="dark:text-violet-400 lg:text-end text-center"> Joq Cafe </span>Fresh Juices 
+				<span class="dark:text-[#F36F1D] lg:text-end text-center"> Joq Cafe </span>Fresh Juices 
 				<br />
 			<h2 class="text-2xl font-bold lg:text-end text-center leadi sm:text-2xl">Vegan Desserts Manhattan</h2>	
 			</h1>

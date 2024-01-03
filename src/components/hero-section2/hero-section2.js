@@ -30,7 +30,7 @@ const Card = ({val}) => {
         src={val.img}
         style={{borderRadius:"50%"}}
       />
-      <h2 className="text-2xl ttext-bold text-black">{val.name}</h2>
+      <h2 className="text-2xl ttext-bold text-[#F36F1D]">{val.name}</h2>
       <p className="text-base text-center text-black">
        {val.description}
       </p>

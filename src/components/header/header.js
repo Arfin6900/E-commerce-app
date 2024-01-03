@@ -39,7 +39,7 @@ const Header = () => {
                     clip-rule="evenodd"
                   />
                 </svg>
-                <span class="text-sm font-medium">Orders</span>
+                <span class="text-sm font-medium text-black">Orders</span>
               </div>
 
               <div class="flex cursor-pointer items-center gap-x-1 rounded-md py-2 px-4 hover:bg-gray-100">
@@ -55,7 +55,7 @@ const Header = () => {
                     clip-rule="evenodd"
                   />
                 </svg>
-                <span class="text-sm font-medium">Favorites</span>
+                <span class="text-sm font-medium text-black">Favorites</span>
               </div>
 
              {pathName!=="cart"?<div class="flex cursor-pointer items-center gap-x-1 rounded-md py-2 px-4 hover:bg-gray-100">
@@ -72,18 +72,18 @@ const Header = () => {
                     2
                   </span>
                 </div>
-                <a href="/cart" class="text-sm font-medium">Cart</a>
+                <a href="/cart" class="text-sm font-medium text-black">Cart</a>
               </div>:null}
 
               {pathName == "login" ? (
                 <a href="/signup" class="ml-2 flex cursor-pointer items-center gap-x-1 rounded-md border py-2 px-4 hover:bg-gray-100">
-                  <p  class="text-sm font-medium">
+                  <p  class="text-sm font-medium text-black">
                     Sign up
                   </p>
                 </a>
               ) : (
                 <a href="login" class="ml-2 flex cursor-pointer items-center gap-x-1 rounded-md border py-2 px-4 hover:bg-gray-100">
-                  <p  class="text-sm font-medium">
+                  <p  class="text-sm font-medium text-black">
                     Sign in
                   </p>
                 </a>
