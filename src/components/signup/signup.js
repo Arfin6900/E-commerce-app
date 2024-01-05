@@ -1,3 +1,4 @@
+import { app_logo } from "@/constants/images";
 import React from "react";
 
 const Signup = () => {
@@ -10,7 +11,7 @@ const Signup = () => {
         >
           <img
             class="w-80 h-auto mr-2"
-            src="joqcafelogo.webp"
+            src={app_logo}
             alt="logo"
           />
         </a>

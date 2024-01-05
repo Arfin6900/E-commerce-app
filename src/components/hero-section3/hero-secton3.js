@@ -1,23 +1,78 @@
+"use client"
 import categories from "@/constants/hero-section3-data";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 const Herosecton3 = () => {
   return (
     <>
-    {categories.map((val,index)=>(
-    <Category item={val} hide={index==1?true:false} />
-    ))}
+      {categories.map((val, index) => (
+        <Category item={val} hide={index == 1 ? true : false} />
+      ))}
     </>
   );
 };
-const Category = ({hide,item}) => {
+
+const Category = ({ hide, item }) => {
+  const cart_data_from_storage=typeof window!=="undefined" && JSON.parse(window.localStorage.getItem("cartData")) || []
+        
+  const [cartData,setCartdata]=useState(!cart_data_from_storage&&item.items||[])
+  const [realtimeData,setCartrealtimedata]=useState(cart_data_from_storage)
+  const addToCart=(item2)=>{
+        cart_data_from_storage.push({...item2,count:1})
+        typeof window!=="undefined" && window.localStorage.setItem("cartData",JSON.stringify(cart_data_from_storage))
+        let newdata= filterAndModifyArray(item.items,cart_data_from_storage)
+        setCartdata(newdata)
+        setCartrealtimedata(prev=>([...prev,{...item2,count:1}]))
+  }
+  const increment=(item2)=>{
+     const findCart=cart_data_from_storage?.find(val=>item2.name==val.name)
+     const deleteCard=cart_data_from_storage.filter(val=>item2.name!==val.name)
+      deleteCard.push({...findCart,count:findCart?.count+1})
+    typeof window!=="undefined" && window.localStorage.setItem("cartData",JSON.stringify(deleteCard))
+    let newdata= filterAndModifyArray(item.items,deleteCard)
+    setCartdata(newdata)
+    setCartrealtimedata(prev=>([...prev,{...item2,count:1}]))
+}
+const decrement=(item2)=>{
+  cart_data_from_storage.push({...item2,count:1})
+  typeof window!=="undefined" && window.localStorage.setItem("cartData",JSON.stringify(cart_data_from_storage))
+  let newdata= filterAndModifyArray(item.items,cart_data_from_storage)
+  setCartdata(newdata)
+  setCartrealtimedata(prev=>([...prev,{...item2,count:1}]))
+}
+
+
+  function filterAndModifyArray(actualArray, secondArray) {
+    // Loop through the actual array
+    actualArray?.forEach((actualItem) => {
+        // Find the corresponding item in the second array based on the ID
+        let matchingItem = secondArray?.find((secondItem) => secondItem.name === actualItem.name) || false;
+
+        // If a matching item is found, update the name property in the actual array
+        if (matchingItem) {
+            actualItem.count=1;
+        }
+    });
+
+    return actualArray;
+}
+
+  useEffect(()=>{
+    const cartRenderData= filterAndModifyArray(item?.items,realtimeData)
+    console.log("🚀 ~ file: hero-secton3.js:43 ~ useEffect ~ cartRenderData:", realtimeData)
+    setCartdata(cartRenderData)
+  },[])
   return (
     <div className="w-full flex flex-col justify-center align-center m-20 gap-20 ">
       <div
         className="flex flex-col gap-5"
         style={{ width: "80vw", alignSelf: "center" }}
       >
-        {!hide&&<h1 className="text-2xl text-black font-bold leadi sm:text-4xl text-center">Menu</h1>}
+        {!hide && (
+          <h1 className="text-2xl text-black font-bold leadi sm:text-4xl text-center">
+            Menu
+          </h1>
+        )}
         <h1 className="text-2xl text-bold text-black text-center">
           {item.name}
         </h1>
@@ -26,73 +81,52 @@ const Category = ({hide,item}) => {
         </p>
       </div>
       <div
-        className="flex w-full"
+        className="flex self-center gap-10 lg:w-[80vw]"
         style={{
           display: "flex",
           flexDirection: "row",
           flexWrap: "wrap",
-          justifyContent: "space-around",
+          // justifyContent: "space-around",
         }}
       >
-       {
-        item.items?.map((val,index)=>(
-          <Card val={val} key={index}/>
-        ))
-       }
+        {cartData?.map((val, index) => (
+          <Card val={val} key={index} onClick={()=>{addToCart(val)}} increment={()=>{increment(val)}} />
+        ))}
       </div>
     </div>
   );
 };
-const Card = ({val}) => {
+const Card = ({ val,onClick,increment}) => {
+
   return (
-    <section class="shadow rounded-3xl lg:w-[390px] w-[270px] transition-transform duration-300 ease-in-out transform hover:shadow-lg hover:scale-105">
+    <section class="shadow rounded-3xl h-[max-content] lg:w-[390px] w-[270px] transition-transform duration-300 ease-in-out transform hover:shadow-lg hover:scale-105">
       <div class="lg:order-first">
         <div class="flex flex-col">
           <div class="p-8 rounded-3xl ring-1 ring-white/10 shadow-sm">
             <div class="flex justify-between">
-              <div class="flex items-center gap-3">
-                <svg
-                  class="w-8 h-8 text-black rounded-full"
-                  viewBox="0 0 280 280"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <rect width="280" height="280" rx="32" fill="#d1cfdf"></rect>
-                  <g clip-path="url(#clip0_501_1489)">
-                    <path
-                      d="M196.064 183.936L152.127 140L196.064 96.0636L240 140L196.064 183.936ZM83.9364 183.936L40 140L83.9364 96.0636L127.873 140L83.9364 183.936ZM140 240L96.0636 196.064L140 152.127L183.936 196.064L140 240ZM140 127.873L96.0636 83.9364L140 40L183.936 83.9364L140 127.873Z"
-                      fill="currentColor"
-                    ></path>
-                  </g>
-                  <defs>
-                    <clipPath id="clip0_501_1489">
-                      <rect
-                        width="200"
-                        height="200"
-                        fill="white"
-                        transform="translate(40 40)"
-                      ></rect>
-                    </clipPath>
-                  </defs>
-                </svg>
+              <div class="flex items-center gap-3 flex-col w-full">
+                <img src={val.image} className="w-40" />
                 <p class="text-neutral-800 font-semibold">{val.name}</p>
               </div>
+            </div>
+            <button onClick={increment}>
+            <p className="text-black"> add more {val?.count}</p>
+            </button>
+            <p class="mt-8 text-sm font-medium text-neutral-800">
+              {val.description}
+            </p>
+            <div class="flex mt-6 justify-between items-center">
               <p>
                 <span class="text-lg font-medium text-[#F36F1D] uppercase lg:text-xl">
                   ${val?.price}
                 </span>
               </p>
-            </div>
-            <p class="mt-8 text-sm font-medium text-neutral-800">
-              {val.description}
-            </p>
-            <div class="flex mt-6">
-              <a
-                class="items-center justify-between inline-flex w-full font-medium py-2.5 text-center text-neutral-800 duration-200 bg-white/5 border border-white/5 rounded-xl h-14 hover:bg-white/10 hover:border-white/10 focus:outline-none focus-visible:outline-black text-base focus-visible:ring-black hover:shadow hover:text-black hover:p-3"
-                href="#"
+              <div
+                onClick={onClick}
+                class="items-center cursor-pointer gap-3 justify-between inline-flex  font-medium py-2.5 text-center text-neutral-800 duration-200 bg-white/5 border border-white/5 rounded-xl h-14 hover:bg-white/10 hover:border-white/10 focus:outline-none focus-visible:outline-black text-base focus-visible:ring-black hover:shadow hover:text-black hover:p-3"
               >
-                Order now <span>→</span>
-              </a>
+                {val?.count?"Already added":"Add to cart"} <span>+</span>
+              </div>
             </div>
           </div>
         </div>

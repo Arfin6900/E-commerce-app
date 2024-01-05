@@ -2,6 +2,7 @@
 import React from "react";
 import NavigationDrawer from "../nav-mobile/nav-mobile";
 import { usePathname } from "next/navigation";
+import { app_logo } from "@/constants/images";
 
 const Header = () => {
   const path = usePathname();
@@ -13,7 +14,7 @@ const Header = () => {
         <div class="border py-3 px-6">
           <div class="flex justify-between items-center">
             <a href="/" class="flex items-center">
-              <img class="w-80 h-auto mr-2" src="joqcafelogo.webp" alt="logo" />
+              <img class="w-80 h-auto mr-2" src={app_logo} alt="logo" />
             </a>
 
             <div class="ml-6 flex flex-1 gap-x-3">
@@ -25,7 +26,7 @@ const Header = () => {
             </div>
 
             <div class="ml-2 flex">
-              <div class="flex cursor-pointer items-center gap-x-1 rounded-md py-2 px-4 hover:bg-gray-100">
+              <a href="/orders" class="flex cursor-pointer items-center gap-x-1 rounded-md py-2 px-4 hover:bg-gray-100">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   class="h-5 w-5 text-gray-500"
@@ -40,7 +41,7 @@ const Header = () => {
                   />
                 </svg>
                 <span class="text-sm font-medium text-black">Orders</span>
-              </div>
+              </a>
 
               <div class="flex cursor-pointer items-center gap-x-1 rounded-md py-2 px-4 hover:bg-gray-100">
                 <svg
