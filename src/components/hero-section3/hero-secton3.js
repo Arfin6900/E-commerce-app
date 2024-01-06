@@ -1,6 +1,7 @@
-"use client"
+"use client";
 import categories from "@/constants/hero-section3-data";
 import React, { useEffect, useState } from "react";
+import CounterComponent from "./counter-component";
 
 const Herosecton3 = () => {
   return (
@@ -13,55 +14,114 @@ const Herosecton3 = () => {
 };
 
 const Category = ({ hide, item }) => {
-  const cart_data_from_storage=typeof window!=="undefined" && JSON.parse(window.localStorage.getItem("cartData")) || []
-        
-  const [cartData,setCartdata]=useState(!cart_data_from_storage&&item.items||[])
-  const [realtimeData,setCartrealtimedata]=useState(cart_data_from_storage)
-  const addToCart=(item2)=>{
-        cart_data_from_storage.push({...item2,count:1})
-        typeof window!=="undefined" && window.localStorage.setItem("cartData",JSON.stringify(cart_data_from_storage))
-        let newdata= filterAndModifyArray(item.items,cart_data_from_storage)
-        setCartdata(newdata)
-        setCartrealtimedata(prev=>([...prev,{...item2,count:1}]))
-  }
-  const increment=(item2)=>{
-     const findCart=cart_data_from_storage?.find(val=>item2.name==val.name)
-     const deleteCard=cart_data_from_storage.filter(val=>item2.name!==val.name)
-      deleteCard.push({...findCart,count:findCart?.count+1})
-    typeof window!=="undefined" && window.localStorage.setItem("cartData",JSON.stringify(deleteCard))
-    let newdata= filterAndModifyArray(item.items,deleteCard)
-    setCartdata(newdata)
-    setCartrealtimedata(prev=>([...prev,{...item2,count:1}]))
-}
-const decrement=(item2)=>{
-  cart_data_from_storage.push({...item2,count:1})
-  typeof window!=="undefined" && window.localStorage.setItem("cartData",JSON.stringify(cart_data_from_storage))
-  let newdata= filterAndModifyArray(item.items,cart_data_from_storage)
-  setCartdata(newdata)
-  setCartrealtimedata(prev=>([...prev,{...item2,count:1}]))
-}
+  // Global variable
+  const cart_data_from_storage =(typeof window !== "undefined" &&JSON.parse(window.localStorage.getItem("cartData"))) || [];
+  // States
+  const [cartData, setCartdata] = useState((!cart_data_from_storage && item.items) || []);
+  const [realtimeData, setCartrealtimedata] = useState(cart_data_from_storage);
 
+  useEffect(() => {
+    const cartRenderData = filterAndModifyArray(item?.items, realtimeData);
+    setCartdata(cartRenderData);
+  }, []);
+
+  // add to cart function
+
+  const addToCart = (item2) => {
+         cart_data_from_storage.push({ ...item2, count: 1 });
+         typeof window !== "undefined" &&
+           window.localStorage.setItem(
+             "cartData",
+             JSON.stringify(cart_data_from_storage)
+           );
+         let newdata = filterAndModifyArray(item.items, cart_data_from_storage);
+         setCartdata(newdata);
+         setCartrealtimedata((prev) => [...prev, { ...item2, count: 1 }]);
+  };
+
+  // add to cart function
+
+  const removeFromCart = (item2) => {
+        const findCart = cart_data_from_storage?.find(
+          (val) => item2.name == val.name
+        );
+        let deleteCart = cart_data_from_storage.filter(
+          (val) => item2.name !== val.name
+        );
+        typeof window !== "undefined" &&
+          window.localStorage.setItem("cartData", JSON.stringify(deleteCart));
+        let newdata = filterAndModifyArray(item.items, deleteCart);
+        setCartdata(newdata);
+        setCartrealtimedata((prev) => [...prev, { ...item2 }]);
+  };
+  // increment of items
+
+  const increment = (item2) => {
+    const findCart = cart_data_from_storage?.find(
+      (val) => item2.name == val.name
+    );
+    let deleteCart = cart_data_from_storage.filter(
+      (val) => item2.name !== val.name
+    );
+    deleteCart.push({ ...findCart, count: findCart?.count + 1 });
+    typeof window !== "undefined" &&
+      window.localStorage.setItem("cartData", JSON.stringify(deleteCart));
+    let newdata = filterAndModifyArray(item.items, deleteCart);
+    setCartdata(newdata);
+    setCartrealtimedata((prev) => [
+      ...prev,
+      { ...item2, count: item2?.count + 1 },
+    ]);
+  };
+
+  // decrement of items
+
+  const decrement = (item2) => {
+    const findCart = cart_data_from_storage?.find(
+      (val) => item2.name == val.name
+    );
+    let deleteCart = cart_data_from_storage.filter(
+      (val) => item2.name !== val.name
+    );
+    if (item2?.count == 0) {
+      typeof window !== "undefined" &&
+        window.localStorage.setItem("cartData", JSON.stringify(deleteCart));
+      let newdata = filterAndModifyArray(item.items, deleteCart);
+      setCartdata(newdata);
+      setCartrealtimedata((prev) => [...prev, { ...item2, count: 0 }]);
+    } else {
+      deleteCart.push({ ...findCart, count: findCart?.count - 1 });
+      typeof window !== "undefined" &&
+        window.localStorage.setItem("cartData", JSON.stringify(deleteCart));
+      let newdata = filterAndModifyArray(item.items, deleteCart);
+      setCartdata(newdata);
+      setCartrealtimedata((prev) => [
+        ...prev,
+        { ...item2, count: item2?.count - 1 },
+      ]);
+    }
+  };
+
+  // filtering 2 arrays 1 is added to cart and one is actual array
 
   function filterAndModifyArray(actualArray, secondArray) {
     // Loop through the actual array
     actualArray?.forEach((actualItem) => {
-        // Find the corresponding item in the second array based on the ID
-        let matchingItem = secondArray?.find((secondItem) => secondItem.name === actualItem.name) || false;
+      // Find the corresponding item in the second array based on the ID
+      let matchingItem =
+        secondArray?.find(
+          (secondItem) => secondItem.name === actualItem.name
+        ) || false;
 
-        // If a matching item is found, update the name property in the actual array
-        if (matchingItem) {
-            actualItem.count=1;
-        }
+      // If a matching item is found, update the name property in the actual array
+      if (matchingItem) {
+        actualItem.count = matchingItem.count;
+      }
     });
 
     return actualArray;
-}
+  }
 
-  useEffect(()=>{
-    const cartRenderData= filterAndModifyArray(item?.items,realtimeData)
-    console.log("🚀 ~ file: hero-secton3.js:43 ~ useEffect ~ cartRenderData:", realtimeData)
-    setCartdata(cartRenderData)
-  },[])
   return (
     <div className="w-full flex flex-col justify-center align-center m-20 gap-20 ">
       <div
@@ -90,14 +150,29 @@ const decrement=(item2)=>{
         }}
       >
         {cartData?.map((val, index) => (
-          <Card val={val} key={index} onClick={()=>{addToCart(val)}} increment={()=>{increment(val)}} />
+          <Card
+            val={val}
+            key={index}
+            addToCart={() => {
+              addToCart(val);
+            }}
+            removeFromCart={() => {
+              removeFromCart(val);
+            }}
+            increment={() => {
+              increment(val);
+            }}
+            decrement={() => {
+              decrement(val);
+            }}
+          />
         ))}
       </div>
     </div>
   );
 };
-const Card = ({ val,onClick,increment}) => {
 
+const Card = ({ val, addToCart, removeFromCart, increment, decrement }) => {
   return (
     <section class="shadow rounded-3xl h-[max-content] lg:w-[390px] w-[270px] transition-transform duration-300 ease-in-out transform hover:shadow-lg hover:scale-105">
       <div class="lg:order-first">
@@ -109,9 +184,15 @@ const Card = ({ val,onClick,increment}) => {
                 <p class="text-neutral-800 font-semibold">{val.name}</p>
               </div>
             </div>
-            <button onClick={increment}>
-            <p className="text-black"> add more {val?.count}</p>
-            </button>
+
+            {val?.count ? (
+              <CounterComponent
+                handleIncrement={increment}
+                handleDecrement={decrement}
+                count={val?.count}
+              />
+            ) : null}
+
             <p class="mt-8 text-sm font-medium text-neutral-800">
               {val.description}
             </p>
@@ -122,10 +203,10 @@ const Card = ({ val,onClick,increment}) => {
                 </span>
               </p>
               <div
-                onClick={onClick}
+                onClick={val?.count == 0 ? increment : addToCart}
                 class="items-center cursor-pointer gap-3 justify-between inline-flex  font-medium py-2.5 text-center text-neutral-800 duration-200 bg-white/5 border border-white/5 rounded-xl h-14 hover:bg-white/10 hover:border-white/10 focus:outline-none focus-visible:outline-black text-base focus-visible:ring-black hover:shadow hover:text-black hover:p-3"
               >
-                {val?.count?"Already added":"Add to cart"} <span>+</span>
+                {val?.count ? "Already added" : "Add to cart"} <span>+</span>
               </div>
             </div>
           </div>
