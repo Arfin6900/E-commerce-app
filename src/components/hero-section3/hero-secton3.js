@@ -2,8 +2,6 @@
 import categories from "@/constants/hero-section3-data";
 import React, { useEffect, useState } from "react";
 import CounterComponent from "./counter-component";
-import { useAppDispatch } from "@/lib/hooks";
-import { addItem } from "@/lib/features/cart/cartSlice";
 
 const Herosecton3 = () => {
   return (
@@ -175,12 +173,6 @@ const Category = ({ hide, item }) => {
 };
 
 const Card = ({ val, addToCart, removeFromCart, increment, decrement }) => {
-  const dispatch = useAppDispatch();
-
-  const handleAddToCart = () => {
-    dispatch(addItem(val));
-  };
-
   return (
     <section class="shadow rounded-3xl h-[max-content] lg:w-[390px] w-[270px] transition-transform duration-300 ease-in-out transform hover:shadow-lg hover:scale-105">
       <div class="lg:order-first">
@@ -211,7 +203,7 @@ const Card = ({ val, addToCart, removeFromCart, increment, decrement }) => {
                 </span>
               </p>
               <div
-                onClick={handleAddToCart}
+                onClick={val?.count == 0 ? increment : addToCart}
                 class="items-center cursor-pointer gap-3 justify-between inline-flex  font-medium py-2.5 text-center text-neutral-800 duration-200 bg-white/5 border border-white/5 rounded-xl h-14 hover:bg-white/10 hover:border-white/10 focus:outline-none focus-visible:outline-black text-base focus-visible:ring-black hover:shadow hover:text-black hover:p-3"
               >
                 {val?.count ? "Already added" : "Add to cart"} <span>+</span>
