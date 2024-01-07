@@ -3,10 +3,13 @@ import React from "react";
 import NavigationDrawer from "../nav-mobile/nav-mobile";
 import { usePathname } from "next/navigation";
 import { app_logo } from "@/constants/images";
+import { useAppSelector } from "@/lib/hooks";
 
 const Header = () => {
   const cart_data_from_storage =(typeof window !== "undefined" &&JSON.parse(window.localStorage.getItem("cartData"))) || [];
  const lenght_of_items=cart_data_from_storage?.filter((val)=>(val?.count))?.length
+ const items = useAppSelector(state => state.cart.items);
+  console.log("🚀 ~ file: hero.js:6 ~ Hero ~ cart:", items)
 
   const path = usePathname();
   const pathName = path.split("/")[1];
@@ -74,7 +77,7 @@ const Header = () => {
                     <path d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3zM16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z" />
                   </svg>
                   <span class="absolute -top-2 -right-2 flex h-4 w-4 items-center justify-center rounded-full bg-red-500 p-2 text-xs text-white">
-                    {lenght_of_items}
+                    {items?.length || 0}
                   </span>
                 </div>
                 <a href="/cart" class="text-sm font-medium text-black">Cart</a>

@@ -13,7 +13,7 @@ const ShoppingCart = () => {
   );
 
   const [cartData, setCartdata] = useState(cart_data_from_storage);
-  const[prices,setPrice]=useState(cart_data_from_storage.filter((item)=>item.count)?.map((item)=>({price:item?.priceId,quantity:item?.count})))
+  const [prices, setPrice] = useState(cart_data_from_storage.filter((item) => item.count)?.map((item) => ({ price: item?.priceId, quantity: item?.count })))
   console.log("🚀 ~ file: shopping-cart.js:10 ~ ShoppingCart ~ totalPrice:", prices)
 
   const deleteItem = (item2) => {
@@ -27,13 +27,14 @@ const ShoppingCart = () => {
 
   const handlePay = async () => {
     // const stripe = await loadStripe("pk_test_TYooMQauvdEDq54NiTphI7jx");
-    const stripe = await loadStripe("pk_test_51IHHnfGIH7z6HWujWRFAtLN5B5EHE73FA8MWf8Ys2duGgqVR0X7gfjQCLwzxebk486nkyHqAi5HKRZq3ZtA6Z1DY00E3OoRGJ5");
+    const stripe = await loadStripe("pk_test_O0tvaykjxmHJ8denijFUBbPy");
+    console.log("🚀 ~ file: shopping-cart.js:31 ~ handlePay ~ stripe:", stripe)
 
-    const {error} = await stripe.redirectToCheckout({
-      lineItems: [{price:'price_1OIBIXGIH7z6HWujCiKH4IiN',quantity:1}],
-      successUrl:"http://localhost:3000",
-      cancelUrl:"https://joqcafe.com",
-      mode:"payment"
+    const { error } = await stripe.redirectToCheckout({
+      lineItems: [{ price: 'price_1OVv9EBsvaxDJwymCWQkFw79', quantity: 1 }],
+      successUrl: "http://localhost:3000",
+      cancelUrl: "http://localhost:3000",
+      mode: "payment"
     })
   };
 

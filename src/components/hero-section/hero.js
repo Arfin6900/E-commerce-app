@@ -1,6 +1,9 @@
+
 import React from 'react'
 
+
 const Hero = () => {
+	
   return (
     <section class="dark:text-black text-black w-full bg-white">
 	<div class="container flex flex-col justify-center p-6 mx-auto sm:py-12 lg:py-24 lg:flex-row lg:justify-around">
