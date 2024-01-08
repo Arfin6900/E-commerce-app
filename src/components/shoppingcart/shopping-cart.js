@@ -13,8 +13,9 @@ const ShoppingCart = () => {
   );
 
   const [cartData, setCartdata] = useState(cart_data_from_storage);
-  const [prices, setPrice] = useState(cart_data_from_storage.filter((item) => item.count)?.map((item) => ({ price: item?.priceId, quantity: item?.count })))
-  console.log("🚀 ~ file: shopping-cart.js:10 ~ ShoppingCart ~ totalPrice:", prices)
+  const subTotal = cartData
+    ?.filter((item) => item.count)
+    ?.reduce((total, item) => total + item.price * item.count, 0);
 
   const deleteItem = (item2) => {
     let deleteCart = cart_data_from_storage.filter(
@@ -28,14 +29,14 @@ const ShoppingCart = () => {
   const handlePay = async () => {
     // const stripe = await loadStripe("pk_test_TYooMQauvdEDq54NiTphI7jx");
     const stripe = await loadStripe("pk_test_O0tvaykjxmHJ8denijFUBbPy");
-    console.log("🚀 ~ file: shopping-cart.js:31 ~ handlePay ~ stripe:", stripe)
+    console.log("🚀 ~ file: shopping-cart.js:31 ~ handlePay ~ stripe:", stripe);
 
     const { error } = await stripe.redirectToCheckout({
-      lineItems: [{ price: 'price_1OVv9EBsvaxDJwymCWQkFw79', quantity: 1 }],
+      lineItems: [{ price: "price_1OVv9EBsvaxDJwymCWQkFw79", quantity: 1 }],
       successUrl: "http://localhost:3000",
       cancelUrl: "http://localhost:3000",
-      mode: "payment"
-    })
+      mode: "payment",
+    });
   };
 
   return (
@@ -52,6 +53,7 @@ const ShoppingCart = () => {
                 val={val}
                 deleteItem={deleteItem}
                 setCartdata={setCartdata}
+                cartData={cartData}
               />
             ))}
         </div>
@@ -61,7 +63,7 @@ const ShoppingCart = () => {
         <div class="mt-6 h-full rounded-lg border bg-white p-6 shadow-md md:mt-0 md:w-1/3">
           <div class="mb-2 flex justify-between">
             <p class="text-gray-700">Subtotal</p>
-            <p class="text-gray-700">$129.99</p>
+            <p class="text-gray-700">${subTotal - 1}.99</p>
           </div>
           <div class="flex justify-between">
             <p class="text-gray-700">Shipping</p>
@@ -71,11 +73,14 @@ const ShoppingCart = () => {
           <div class="flex justify-between">
             <p class="text-lg font-bold">Total</p>
             <div class="">
-              <p class="mb-1 text-lg font-bold">$134.98 USD</p>
+              <p class="mb-1 text-lg font-bold">${subTotal - 1 + 5}.98 USD</p>
               <p class="text-sm text-gray-700">including VAT</p>
             </div>
           </div>
-          <button onClick={handlePay} class="mt-6 w-full rounded-md bg-blue-500 py-1.5 font-medium text-blue-50 hover:bg-blue-600">
+          <button
+            onClick={handlePay}
+            class="mt-6 w-full rounded-md bg-blue-500 py-1.5 font-medium text-blue-50 hover:bg-blue-600"
+          >
             Check out
           </button>
         </div>
@@ -84,13 +89,46 @@ const ShoppingCart = () => {
   );
 };
 
-const Card = ({ val, deleteItem }) => {
+const Card = ({ val, deleteItem, cartData, setCartdata }) => {
   const [count, setCount] = useState(val?.count);
   const incrementCount = () => {
     setCount((prev) => prev + 1);
+
+    // Find the index of the item in cartData
+    const itemIndex = cartData.findIndex((val2) => val2.name === val.name);
+
+    // If the item is not in the cart, add it with the updated count
+    if (itemIndex === -1) {
+      setCartdata([...cartData, { ...val, count: count + 1 }]);
+    } else {
+      // If the item is already in the cart, update its count
+      const updatedCartData = [...cartData];
+      updatedCartData[itemIndex] = {
+        ...updatedCartData[itemIndex],
+        count: count + 1,
+      };
+      setCartdata(updatedCartData);
+    }
   };
   const decrementCount = () => {
-    setCount((prev) => prev - 1);
+    if (count !== 1) {
+      setCount((prev) => prev - 1);
+      // Find the index of the item in cartData
+      const itemIndex = cartData.findIndex((val2) => val2.name === val.name);
+
+      // If the item is not in the cart, add it with the updated count
+      if (itemIndex === -1) {
+        setCartdata([...cartData, { ...val, count: count - 1 }]);
+      } else {
+        // If the item is already in the cart, update its count
+        const updatedCartData = [...cartData];
+        updatedCartData[itemIndex] = {
+          ...updatedCartData[itemIndex],
+          count: count - 1,
+        };
+        setCartdata(updatedCartData);
+      }
+    }
   };
 
   return (
@@ -126,7 +164,7 @@ const Card = ({ val, deleteItem }) => {
             </span>
           </div>
           <div class="flex items-center space-x-4">
-            <p class="text-sm">${val?.price}</p>
+            <p class="text-sm">${val?.price * count}</p>
             <svg
               onClick={() => {
                 deleteItem(val);

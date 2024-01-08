@@ -2,6 +2,9 @@
 import categories from "@/constants/hero-section3-data";
 import React, { useEffect, useState } from "react";
 import CounterComponent from "./counter-component";
+import { useAppDispatch } from "@/lib/hooks";
+import { useDispatch, useSelector } from "react-redux";
+import { addItem } from "@/lib/features/cart/cartSlice";
 
 const Herosecton3 = () => {
   return (
@@ -14,10 +17,18 @@ const Herosecton3 = () => {
 };
 
 const Category = ({ hide, item }) => {
+  const dispatch = useDispatch();
+  const cartLenght = useSelector((state) => state);
+
   // Global variable
-  const cart_data_from_storage =(typeof window !== "undefined" &&JSON.parse(window.localStorage.getItem("cartData"))) || [];
+  const cart_data_from_storage =
+    (typeof window !== "undefined" &&
+      JSON.parse(window.localStorage.getItem("cartData"))) ||
+    [];
   // States
-  const [cartData, setCartdata] = useState((!cart_data_from_storage && item.items) || []);
+  const [cartData, setCartdata] = useState(
+    (!cart_data_from_storage && item.items) || []
+  );
   const [realtimeData, setCartrealtimedata] = useState(cart_data_from_storage);
 
   useEffect(() => {
@@ -28,31 +39,33 @@ const Category = ({ hide, item }) => {
   // add to cart function
 
   const addToCart = (item2) => {
-         cart_data_from_storage.push({ ...item2, count: 1 });
-         typeof window !== "undefined" &&
-           window.localStorage.setItem(
-             "cartData",
-             JSON.stringify(cart_data_from_storage)
-           );
-         let newdata = filterAndModifyArray(item.items, cart_data_from_storage);
-         setCartdata(newdata);
-         setCartrealtimedata((prev) => [...prev, { ...item2, count: 1 }]);
+    cart_data_from_storage.push({ ...item2, count: 1 });
+    typeof window !== "undefined" &&
+      window.localStorage.setItem(
+        "cartData",
+        JSON.stringify(cart_data_from_storage)
+      );
+    let newdata = filterAndModifyArray(item.items, cart_data_from_storage);
+    dispatch(addItem(cart_data_from_storage));
+    setCartdata(newdata);
+    setCartrealtimedata((prev) => [...prev, { ...item2, count: 1 }]);
   };
 
   // add to cart function
 
   const removeFromCart = (item2) => {
-        const findCart = cart_data_from_storage?.find(
-          (val) => item2.name == val.name
-        );
-        let deleteCart = cart_data_from_storage.filter(
-          (val) => item2.name !== val.name
-        );
-        typeof window !== "undefined" &&
-          window.localStorage.setItem("cartData", JSON.stringify(deleteCart));
-        let newdata = filterAndModifyArray(item.items, deleteCart);
-        setCartdata(newdata);
-        setCartrealtimedata((prev) => [...prev, { ...item2 }]);
+    const findCart = cart_data_from_storage?.find(
+      (val) => item2.name == val.name
+    );
+    let deleteCart = cart_data_from_storage.filter(
+      (val) => item2.name !== val.name
+    );
+    typeof window !== "undefined" &&
+      window.localStorage.setItem("cartData", JSON.stringify(deleteCart));
+    let newdata = filterAndModifyArray(item.items, deleteCart);
+
+    setCartdata(newdata);
+    setCartrealtimedata((prev) => [...prev, { ...item2 }]);
   };
   // increment of items
 
@@ -67,6 +80,7 @@ const Category = ({ hide, item }) => {
     typeof window !== "undefined" &&
       window.localStorage.setItem("cartData", JSON.stringify(deleteCart));
     let newdata = filterAndModifyArray(item.items, deleteCart);
+    dispatch(addItem(cart_data_from_storage));
     setCartdata(newdata);
     setCartrealtimedata((prev) => [
       ...prev,
@@ -87,6 +101,7 @@ const Category = ({ hide, item }) => {
       typeof window !== "undefined" &&
         window.localStorage.setItem("cartData", JSON.stringify(deleteCart));
       let newdata = filterAndModifyArray(item.items, deleteCart);
+      dispatch(addItem(cart_data_from_storage));
       setCartdata(newdata);
       setCartrealtimedata((prev) => [...prev, { ...item2, count: 0 }]);
     } else {
@@ -94,6 +109,7 @@ const Category = ({ hide, item }) => {
       typeof window !== "undefined" &&
         window.localStorage.setItem("cartData", JSON.stringify(deleteCart));
       let newdata = filterAndModifyArray(item.items, deleteCart);
+      dispatch(addItem(cart_data_from_storage));
       setCartdata(newdata);
       setCartrealtimedata((prev) => [
         ...prev,
@@ -156,9 +172,9 @@ const Category = ({ hide, item }) => {
             addToCart={() => {
               addToCart(val);
             }}
-            removeFromCart={() => {
-              removeFromCart(val);
-            }}
+            // removeFromCart={() => {
+            //   removeFromCart(val);
+            // }}
             increment={() => {
               increment(val);
             }}
@@ -172,7 +188,7 @@ const Category = ({ hide, item }) => {
   );
 };
 
-const Card = ({ val, addToCart, removeFromCart, increment, decrement }) => {
+const Card = ({ val, addToCart, increment, decrement }) => {
   return (
     <section class="shadow rounded-3xl h-[max-content] lg:w-[390px] w-[270px] transition-transform duration-300 ease-in-out transform hover:shadow-lg hover:scale-105">
       <div class="lg:order-first">
@@ -199,7 +215,7 @@ const Card = ({ val, addToCart, removeFromCart, increment, decrement }) => {
             <div class="flex mt-6 justify-between items-center">
               <p>
                 <span class="text-lg font-medium text-[#F36F1D] uppercase lg:text-xl">
-                  ${val?.price}
+                  ${val?.count?val?.price*val?.count:val?.price}
                 </span>
               </p>
               <div
