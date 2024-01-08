@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 const CounterComponent = ({handleIncrement,handleDecrement,count}) => {
   
   return (
-    <div className="flex items-center justify-center mt-5">
+    <div className="flex items-center justify-center mt-5 text-black">
       <button
         className="bg-green-500 text-white p-2 rounded-full mr-2"
         onClick={handleIncrement}

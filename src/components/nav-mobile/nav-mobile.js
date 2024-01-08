@@ -9,26 +9,11 @@ const navContents = [
     route: "/",
     route2: "/",
   },
-  // {
-  //   name: "Testinomials",
-  //   route: "/testinomials",
-  //   route2: "testinomials",
-  // },
   {
     name: "Services",
     route: "/services",
     route2: "services",
   },
-  // {
-  //   name: "Resume",
-  //   route: "/aboutme",
-  //   route2: "aboutme",
-  // },
-  // {
-  //   name: "Projects",
-  //   route: "/portfolio",
-  //   route2: "portfolio",
-  // },
   {
     name: "Contact",
     route: "/contact",
@@ -96,7 +81,7 @@ const NavitemLevel1 = ({ val }) => {
     </>
   );
 };
-const Navitem = ({ item, setOpen,open }) => {
+const Navitem = ({ item, }) => {
   return (
     <div
       style={{
@@ -108,24 +93,5 @@ const Navitem = ({ item, setOpen,open }) => {
       <a href={item.route} style={{ fontFamily: "poppins", fontSize: "1.5rem",color:"black"}}>{item.name}</a>
     </div>
   );
-};
-
-
-const styles = {
-  navoptionsContainer: {
-    display: "flex",
-    flexDirection: "column",
-    backgroundColor: "#F2F3F8",
-    padding: 10,
-    gap: 7,
-    overflow: "auto",
-    maxHeight: 110,
-  },
-  navOptions: {
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-    marginLeft: 30,
-  },
 };
 export default NavigationDrawer;

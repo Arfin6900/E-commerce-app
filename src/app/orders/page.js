@@ -3,7 +3,7 @@ import React from 'react'
 
 const page = () => {
   return (
-    <div className=' h-auto flex lg:pt-[40px] pt-[60px] pb-[10px] justify-center ' >
+    <div className=' h-auto flex lg:pt-[40px] pt-[60px] pb-[10px] bg-white justify-center text-black' >
     <Orders />
     </div>
   )

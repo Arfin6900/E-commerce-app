@@ -11,7 +11,8 @@ const categories=[
             image:item1,
             description:"a decadent fusion that unites the rich allure of cacao with the bold essence of lion's mane, the warm embrace of cinnamon, and the invigorating kick of coffee. This luscious elixir is a symphony of flavors crafted to tantalize your taste buds and elevate your senses.",
             price:12,
-            priceId:"prctbl_1OT1A7BsvaxDJwymaPLpLTod",
+            priceId:"price_1OT0xxBsvaxDJwymvEmk17xW",
+            testPriceId:"price_1OVvDJBsvaxDJwymviMLcct2"
         },
         {
             name:"Sunshine Elixir -",

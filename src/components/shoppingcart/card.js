@@ -1,48 +1,61 @@
 "use client"
+
+import { useState } from "react";
+
 const Card = ({ val, deleteItem, cartData, setCartdata }) => {
     const [count, setCount] = useState(val?.count);
+
+
+    // Increment=============> +
+
+
     const incrementCount = () => {
-      setCount((prev) => prev + 1);
+           setCount((prev) => prev + 1);
   
-      // Find the index of the item in cartData
-      const itemIndex = cartData.findIndex((val2) => val2.name === val.name);
+           // Find the index of the item in cartData
+           const itemIndex = cartData.findIndex((val2) => val2.name === val.name);
   
-      // If the item is not in the cart, add it with the updated count
-      if (itemIndex === -1) {
-        setCartdata([...cartData, { ...val, count: count + 1 }]);
-      } else {
-        // If the item is already in the cart, update its count
-        const updatedCartData = [...cartData];
-        updatedCartData[itemIndex] = {
-          ...updatedCartData[itemIndex],
-          count: count + 1,
-        };
-        setCartdata(updatedCartData);
+           // If the item is not in the cart, add it with the updated count
+           if (itemIndex === -1) {
+              setCartdata([...cartData, { ...val, count: count + 1 }]);
+           } else {
+               // If the item is already in the cart, update its count
+               const updatedCartData = [...cartData];
+               updatedCartData[itemIndex] = {
+               ...updatedCartData[itemIndex],
+               count: count + 1,
+             };
+            setCartdata(updatedCartData);
       }
     };
+    
+  // Decrement=============> -
+
+
     const decrementCount = () => {
-      if (count !== 1) {
-        setCount((prev) => prev - 1);
-        // Find the index of the item in cartData
-        const itemIndex = cartData.findIndex((val2) => val2.name === val.name);
+           if (count !== 1) {
+                      setCount((prev) => prev - 1);
+                      // Find the index of the item in cartData
+                      const itemIndex = cartData.findIndex((val2) => val2.name === val.name);
   
-        // If the item is not in the cart, add it with the updated count
-        if (itemIndex === -1) {
-          setCartdata([...cartData, { ...val, count: count - 1 }]);
-        } else {
-          // If the item is already in the cart, update its count
-          const updatedCartData = [...cartData];
-          updatedCartData[itemIndex] = {
-            ...updatedCartData[itemIndex],
-            count: count - 1,
-          };
-          setCartdata(updatedCartData);
+                     // If the item is not in the cart, add it with the updated count
+                  if (itemIndex === -1) {
+                      setCartdata([...cartData, { ...val, count: count - 1 }]);
+                     } 
+                 else {
+                      // If the item is already in the cart, update its count
+                     const updatedCartData = [...cartData];
+                     updatedCartData[itemIndex] = {
+                     ...updatedCartData[itemIndex],
+                     count: count - 1,
+                   };
+                 setCartdata(updatedCartData);
         }
       }
     };
   
     return (
-      <div class="justify-between mb-6 rounded-lg bg-white p-6 shadow-md sm:flex sm:justify-start">
+      <div class="justify-between mb-6 rounded-lg bg-white p-6 shadow-md sm:flex sm:justify-start text-black">
         <img
           src={val?.image}
           alt="product-image"
