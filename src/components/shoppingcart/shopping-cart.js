@@ -133,16 +133,16 @@ const ShoppingCart = () => {
       <div class="mt-6 border-t border-b py-2">
         <div class="flex items-center justify-between">
           <p class="text-sm font-medium text-gray-900">Subtotal</p>
-          <p class="font-semibold text-gray-900">${subTotal?subTotal - 1+.99:0}</p>
+          <p class="font-semibold text-gray-900">${subTotal || 0.0}</p>
         </div>
         <div class="flex items-center justify-between">
           <p class="text-sm font-medium text-gray-900">Shipping</p>
-          <p class="font-semibold text-gray-900">${subTotal?4.99:0}</p>
+          <p class="font-semibold text-gray-900">${subTotal?0.0:0}</p>
         </div>
       </div>
       <div class="mt-6 flex items-center justify-between">
         <p class="text-sm font-medium text-gray-900">Total</p>
-        <p class="text-2xl font-semibold text-gray-900">${subTotal?subTotal - 1 + 5+.98:`0`} USD</p>
+        <p class="text-2xl font-semibold text-gray-900">${subTotal || 0.0}USD</p>
       </div>
     </div>
     <abbr title={!email.valid?"valid email is Required":!name?"Name is required":!phone?"phone number is required":!address.valid?"Address is required":"Click to process your shopping"}><button disabled={!address.valid||!name||!email} onClick={handlePay} class={`mt-4 mb-8 w-full rounded-md ${!address.valid||!name||!email?"bg-gray-400":"bg-gray-900"} px-6 py-3 font-medium text-white`}>Place Order</button></abbr> 
