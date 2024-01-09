@@ -2,7 +2,7 @@ const { default: CounterComponent } = require("./counter-component");
 
 const Card = ({ val, addToCart, increment, decrement }) => {
     return (
-      <section class="shadow rounded-3xl h-[max-content] lg:w-[390px] w-[270px] transition-transform duration-300 ease-in-out transform hover:shadow-lg hover:scale-105">
+      <section class="shadow rounded-3xl h-[max-content] lg:w-[390px] w-[90%] transition-transform duration-300 ease-in-out transform hover:shadow-lg hover:scale-105">
         <div class="lg:order-first">
           <div class="flex flex-col">
             <div class="p-8 rounded-3xl ring-1 ring-white/10 shadow-sm">

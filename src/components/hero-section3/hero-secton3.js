@@ -5,7 +5,7 @@ import Category from "./category";
 
 const Herosecton3 = () => {
   return (
-    <div className="flex flex-col justify-center items-center" style={{scrollBehavior:"smooth"}} id="items">
+    <div className="flex flex-col justify-center items-center w-[100vw]" style={{scrollBehavior:"smooth"}} id="items">
       {categories.map((val, index) => (
         <Category item={val} hide={index == 1 ? true : false} />
       ))}

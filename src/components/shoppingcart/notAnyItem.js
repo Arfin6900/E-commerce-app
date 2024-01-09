@@ -4,7 +4,7 @@ import ButtonContainer from "../buttons/buttonContainer";
 
 const NotAnyItem = () => {
   return (
-    <div class="justify-between items-center gap-4 mb-6 rounded-lg bg-white p-6 shadow-md sm:flex sm:justify-start text-black flex-col">
+    <div class="justify-between self-center  items-center gap-[20px] mb-6 rounded-lg bg-white p-6 shadow-md flex sm:justify-start text-black flex-col">
        <img src={addToCart}/>
        <a href="/#items">
        <ButtonContainer>

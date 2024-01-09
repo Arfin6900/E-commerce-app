@@ -61,10 +61,10 @@ const Card = ({ val, deleteItem, cartData, setCartdata }) => {
           alt="product-image"
           class="w-full rounded-lg sm:w-40"
         />
-        <div class="sm:ml-4 sm:flex sm:w-full sm:justify-between">
+        <div class="sm:ml-4 sm:flex sm:w-full sm:justify-between gap-4">
           <div class="mt-5 sm:mt-0">
             <h2 class="text-lg font-bold text-gray-900">{val?.name}</h2>
-            <p class="mt-1 text-xs text-gray-700 text-justify">
+            <p class="mt-1 text-sm text-gray-700 text-justify">
               {val?.description}
             </p>
           </div>

@@ -100,7 +100,7 @@ const Category = ({ hide, item }) => {
     }
   
     return (
-      <div className="w-full flex flex-col justify-center align-center m-20 gap-20 ">
+      <div className="w-[100vw] flex flex-col justify-center align-center m-20 gap-20 ">
         <div
           className="flex flex-col gap-5"
           style={{ width: "80vw", alignSelf: "center" }}
@@ -118,7 +118,7 @@ const Category = ({ hide, item }) => {
           </p>
         </div>
         <div
-          className="flex self-center gap-10 lg:w-[80vw]"
+          className="flex self-center justify-center gap-10 lg:w-[80vw] w-[100vw]"
           style={{
             display: "flex",
             flexDirection: "row",

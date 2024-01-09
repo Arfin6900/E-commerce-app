@@ -58,9 +58,9 @@ const ShoppingCart = () => {
   };
 
   return (
-    <div class="h-screen bg-gray-100 pt-20">
+    <div class="h-screen bg-gray-100 lg:pt-20 pt-40">
       <h1 class="mb-10 text-center text-2xl font-bold text-black">Cart Items</h1>
-      <div class="mx-auto max-w-5xl justify-center px-6 md:flex md:space-x-6 xl:px-0">
+      <div class="mx-auto max-w-7xl justify-center px-6 md:flex md:space-x-6 xl:px-0 bg-[white]">
         {/* Items  */}
 
        {isItem?
@@ -78,9 +78,9 @@ const ShoppingCart = () => {
         </div>:<NotAnyItem />}
         {/* Total component */}
         <div class="mt-10 bg-gray-50 px-4 pt-8 lg:mt-0">
-    <p class="text-xl font-medium">Payment Details</p>
+    <p class="text-xl font-medium text-black">Payment Details</p>
     <p class="text-gray-400">Complete your order by providing your payment details.</p>
-    <div class="">
+    <div class="text-black">
       <label for="email" class="mt-4 mb-2 block text-sm font-medium">Email</label>
       <div class="relative">
         <input style={{border:email?.email&&!email.valid?'1px solid red':"unset"}} onChange={(e)=>setEmail({email:e.target.value,valid:e.target.value.includes("@")&&e.target.value.includes(".com")})} value={email.email} type="text" id="email" name="email" class="w-full rounded-md border border-gray-200 px-4 py-3 pl-11 text-sm shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500" placeholder="your.email@gmail.com" />
