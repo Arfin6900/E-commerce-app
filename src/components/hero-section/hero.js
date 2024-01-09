@@ -19,7 +19,7 @@ const Hero = () => {
 			<p class="mt-6 mb-8 text-lg sm:mb-12 lg:text-end">Experience locally-sourced ingredients and innovative dishes at Joq Cafe. 
 			</p>
 			<div class="flex flex-col space-y-4 sm:items-center sm:justify-center sm:flex-row sm:space-y-0 sm:space-x-4 lg:justify-end">
-				<a rel="noopener noreferrer" href="#" class="px-8 py-3 text-lg font-semibold rounded bg-black text-white">LEARN MORE</a>
+				<a rel="noopener noreferrer" href="#items" class="px-8 py-3 text-lg font-semibold rounded bg-black text-white">LEARN MORE</a>
 			</div>
 		</div>
 	</div>

@@ -26,12 +26,13 @@ const Header = () => {
               <img class="w-80 h-auto mr-2" src={app_logo} alt="logo" />
             </a>
 
-            <div class="ml-6 flex flex-1 gap-x-3">
-              <input
+            <div class="ml-6 flex flex-1 gap-x-3 items-center justify-center">
+              {/* <input
                 type="text"
                 placeholder="search"
                 class="w-full h-[50px] rounded-md border border-[#DDE2E4] px-3 py-2 text-sm"
-              />
+              /> */}
+              <h1 className="font-bold text-[#C47D26] text-4xl">Joq Cafe</h1>
             </div>
 
             <div class="ml-2 flex">
