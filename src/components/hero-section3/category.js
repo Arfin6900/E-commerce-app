@@ -129,7 +129,7 @@ const Category = ({ hide, item }) => {
           {cartData?.map((val, index) => (
             <Card
               val={val}
-              key={index}
+              key={`${val.name}${index}`}
               addToCart={() => {
                 addToCart(val);
               }}

@@ -19,7 +19,8 @@
       backdrop-filter: blur(5px);
       position: fixed;
       z-index: 50;
-      padding: 20px;
+      padding: 0 5px;
+      align-items: center;
     }
   
     .drawer-content {

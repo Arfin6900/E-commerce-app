@@ -50,7 +50,7 @@ const Availabledays = () => {
         <div class="flex flex-col justify-center p-6 text-center rounded-sm lg:max-w-md xl:max-w-lg lg:text-left">
           <h4 class="text-xl text-gray-900 font-bold">Come Grab a Cup !</h4>
 
-          <div class="flex-1 bg-white rounded-lg shadow-xl mt-4 text-black w-[90vw] ">
+          <div class="flex-1 bg-white rounded-lg shadow-xl mt-4 text-black lg:w-[500px] w-[90vw] ">
             <div class="relative p-5 ">
               <div class="absolute h-full border border-dashed border-opacity-20 border-secondary"></div>
               {days.map((val) => {
