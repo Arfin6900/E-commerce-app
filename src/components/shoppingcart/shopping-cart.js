@@ -36,25 +36,27 @@ const ShoppingCart = () => {
     setCartdata(deleteCart);
   };
 
-  const handlePay = async () => {
-    // const stripe = await loadStripe("pk_test_TYooMQauvdEDq54NiTphI7jx");
-    const stripe = await loadStripe(!isDevelopement?process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY_TEST:process?.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY_LIVE);
-    console.log("🚀 ~ file: shopping-cart.js:31 ~ handlePay ~ stripe:", stripe);
-    const user={
-      name:name,
-      email:email.email,
-      address:address,
-      phoneNumber:phone,
-      total:`${subTotal?subTotal - 1 + 5+.98:`0`} USD`
-    }
-   typeof window !== "undefined" && window?.localStorage.setItem("userInfo",JSON.stringify(user))
-    const { error } = await stripe.redirectToCheckout({
-      lineItems: lineItems,
-      successUrl: "http://localhost:3000/payment-success",
-      cancelUrl: "http://localhost:3000/payment-failure",
-      mode: "payment",
-    });
-  };
+    const handlePay = async () => {
+         const successUrl = `${window?.location.origin}/payment-success`;
+         const cancelUrl = `${window?.location.origin}/payment-failure`; 
+      // const stripe = await loadStripe("pk_test_TYooMQauvdEDq54NiTphI7jx");
+      const stripe = await loadStripe(!isDevelopement?process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY_TEST:process?.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY_LIVE);
+      console.log("🚀 ~ file: shopping-cart.js:31 ~ handlePay ~ stripe:", stripe);
+      const user={
+        name:name,
+        email:email.email,
+        address:address,
+        phoneNumber:phone,
+        total:`${subTotal?subTotal - 1 + 5+.98:`0`} USD`
+      }
+    typeof window !== "undefined" && window?.localStorage.setItem("userInfo",JSON.stringify(user))
+      const { error } = await stripe.redirectToCheckout({
+        lineItems: lineItems,
+        successUrl:successUrl,
+        cancelUrl:cancelUrl,
+        mode: "payment",
+      });
+    };
 
   return (
     <div class="h-screen bg-gray-100 lg:pt-20 pt-[7rem]">
