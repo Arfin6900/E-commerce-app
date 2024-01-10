@@ -1,11 +1,11 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import NavigationDrawer from "../nav-mobile/nav-mobile";
 import { usePathname } from "next/navigation";
 import { app_logo } from "@/constants/images";
 // import { useAppSelector } from "@/lib/hooks";
 import { useSelector } from "react-redux";
-
+import "./header.css"
 const Header = () => {
   const cart_data_from_storage =(typeof window !== "undefined" &&JSON.parse(window.localStorage.getItem("cartData"))) || [];
  const lenght_of_items=cart_data_from_storage?.filter((val)=>(val?.count))?.length
@@ -16,14 +16,39 @@ const Header = () => {
   const path = usePathname();
   const pathName = path.split("/")[1];
   
+
+  const [scrollValue, setScrollValue] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollValue(window.scrollY);
+      // Add additional logic based on the scroll value if needed
+    };
+
+    // Attach the scroll event listener when the component mounts
+    window.addEventListener("scroll", handleScroll);
+
+    // Clean up the event listener when the component unmounts
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []); // The empty dependency array ensures that the effect runs only once on mount
+
+  console.log("scrollValue===================>", scrollValue);
+
   return (
     <>
       <NavigationDrawer />
-      <div class="bg-white hidden lg:block " style={{ width: "100vw" }}>
+      <div    style={{
+          background:"white",
+              width:"100vw",
+              position:"fixed",
+              zIndex:20
+        }} class="bg-white hidden lg:block ">
         <div class="border py-3 px-6">
           <div class="flex justify-between items-center">
             <a href="/" class="flex items-center">
-              <img class="w-80 h-auto mr-2" src={app_logo} alt="logo" />
+              <img class={`${scrollValue<100?"JOQ_width-100":"JOQ_width-80"} h-auto mr-2`} src={app_logo} alt="logo" />
             </a>
 
             <div class="ml-6 flex flex-1 gap-x-3 items-center justify-center">
