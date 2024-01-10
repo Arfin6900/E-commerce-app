@@ -14,10 +14,11 @@ const ShoppingCart = () => {
   const [email, setEmail] = useState({email:"",valid:false});
   const [name, setName] = useState("");
   const [phone, setPhone] = useState('');
+  const [isLoading, setisLoading] = useState(false);
   const [address, setAddress] = useState({streetAddr:'',state:US_States[0],zipCode:'',valid:false});
   console.log("🚀 ~ file: shopping-cart.js:17 ~ ShoppingCart ~ address:", address)
 
-  const isDevelopement=process.env.NODE_ENV=="production"?true:false
+  const isDevelopement=process.env.NEXT_PUBLIC_ENV=="PRODUCTION"?true:false
   
 
 
@@ -37,11 +38,13 @@ const ShoppingCart = () => {
   };
 
     const handlePay = async () => {
+         setisLoading(true)
          const successUrl = `${window?.location.origin}/payment-success`;
          const cancelUrl = `${window?.location.origin}/payment-failure`; 
       // const stripe = await loadStripe("pk_test_TYooMQauvdEDq54NiTphI7jx");
       const stripe = await loadStripe(!isDevelopement?process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY_TEST:process?.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY_LIVE);
       console.log("🚀 ~ file: shopping-cart.js:31 ~ handlePay ~ stripe:", stripe);
+      stripe.check
       const user={
         name:name,
         email:email.email,
@@ -49,13 +52,15 @@ const ShoppingCart = () => {
         phoneNumber:phone,
         total:`${subTotal?subTotal - 1 + 5+.98:`0`} USD`
       }
-    typeof window !== "undefined" && window?.localStorage.setItem("userInfo",JSON.stringify(user))
+      typeof window !== "undefined" && window?.localStorage.setItem("userInfo",JSON.stringify(user))
       const { error } = await stripe.redirectToCheckout({
-        lineItems: lineItems,
-        successUrl:successUrl,
-        cancelUrl:cancelUrl,
-        mode: "payment",
-      });
+          lineItems: lineItems,
+          successUrl:successUrl,
+          cancelUrl:cancelUrl,
+          mode: "payment",
+          customerEmail:email.email
+      })
+      setisLoading(false)
     };
 
   return (
@@ -66,7 +71,9 @@ const ShoppingCart = () => {
 
        {isItem?
         <div class="rounded-lg md:w-2/3 max-h-[80vh] overflow-auto">
-          {cartData
+          {
+          isLoading?<p className="test-lg text-black self-center">Loading...</p>:
+          cartData
             ?.filter((val) => val?.count)
             ?.map((val) => (
               <Card

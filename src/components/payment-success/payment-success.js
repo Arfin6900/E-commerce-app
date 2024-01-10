@@ -1,4 +1,5 @@
 "use client"
+import sendEmail from '@/constants/sendEmail';
 import { useRouter } from 'next/navigation'
 import React, { useEffect } from 'react'
 const Paymentsuccess = () => {
@@ -22,6 +23,7 @@ const Paymentsuccess = () => {
        if(!user){
         navigate.back()
        }else{
+        console.log("previous url is: " + document.referrer);
         try {
             const templateParams = {
               name: user?.name,
@@ -35,12 +37,14 @@ const Paymentsuccess = () => {
             };
             console.log("🚀 ~ useEffect ~ templateParams:", templateParams)
             //  sendEmail(templateParams);
+             localStorage.removeItem("userInfo")
+             localStorage.removeItem("cartData")
              console.log("email sent successfull ")
           } catch (error) {
             // Handle errors
           }
        }
-    },[user])
+    },[])
   return (
     <div class="bg-gray-100 h-screen">
     <div class="bg-white p-6  md:mx-auto">
@@ -53,7 +57,7 @@ const Paymentsuccess = () => {
           <h3 class="md:text-2xl text-base text-gray-900 font-semibold text-center">Payment Done!</h3>
           <p class="text-gray-600 my-2">Thank you <b>{user?.name}</b> for completing your secure online payment.</p>
           <p> Have a great day!  </p>
-          <div class="py-10 text-center">
+          <div class="py-10 text-center cursor-pointer">
               <a onClick={()=>{navigate.push('/')}} class="px-12 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold py-3">
                   GO BACK 
              </a>
