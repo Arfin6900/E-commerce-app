@@ -43,7 +43,7 @@ const NavigationDrawer = ({ ishome }) => {
       <img
         src="/joqcafelogo.webp"
         alt="portfolio-logo"
-        style={{ width: 120,height:"max-content", display: ishome ? "none" : "flex" }}
+        style={{ width: 180, display: ishome ? "none" : "flex" }}
       />
       <div>
         <button

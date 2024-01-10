@@ -54,7 +54,7 @@ const Paymentsuccess = () => {
           <p class="text-gray-600 my-2">Thank you <b>{user?.name}</b> for completing your secure online payment.</p>
           <p> Have a great day!  </p>
           <div class="py-10 text-center">
-              <a onClick={()=>{navigate.back()}} class="px-12 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold py-3">
+              <a onClick={()=>{navigate.push('/')}} class="px-12 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold py-3">
                   GO BACK 
              </a>
           </div>
