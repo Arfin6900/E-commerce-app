@@ -27,7 +27,6 @@ const ShoppingCart = () => {
   const subTotal = cartData
     ?.filter((item) => item.count)
     ?.reduce((total, item) => total + item.price * item.count, 0);
-
   const deleteItem = (item2) => {
     let deleteCart = cart_data_from_storage.filter(
       (val) => item2.name !== val.name
@@ -58,7 +57,7 @@ const ShoppingCart = () => {
   };
 
   return (
-    <div class="h-screen bg-gray-100 lg:pt-20 pt-40">
+    <div class="h-screen bg-gray-100 lg:pt-20 pt-[7rem]">
       <h1 class="mb-10 text-center text-2xl font-bold text-black">Cart Items</h1>
       <div class="mx-auto max-w-7xl justify-center px-6 md:flex md:space-x-6 xl:px-0 bg-[white]">
         {/* Items  */}
@@ -133,7 +132,7 @@ const ShoppingCart = () => {
       <div class="mt-6 border-t border-b py-2">
         <div class="flex items-center justify-between">
           <p class="text-sm font-medium text-gray-900">Subtotal</p>
-          <p class="font-semibold text-gray-900">${subTotal?subTotal - 1+.99:0}</p>
+          <p class="font-semibold text-gray-900">${subTotal?subTotal?.toFixed() - 1+.99:0}</p>
         </div>
         <div class="flex items-center justify-between">
           <p class="text-sm font-medium text-gray-900">Shipping</p>
@@ -142,10 +141,10 @@ const ShoppingCart = () => {
       </div>
       <div class="mt-6 flex items-center justify-between">
         <p class="text-sm font-medium text-gray-900">Total</p>
-        <p class="text-2xl font-semibold text-gray-900">${subTotal?subTotal - 1 + 5+.98:`0`} USD</p>
+        <p class="text-2xl font-semibold text-gray-900">${subTotal?subTotal?.toFixed() - 1 + 5+.98:`0`} USD</p>
       </div>
     </div>
-    <abbr title={!email.valid?"valid email is Required":!name?"Name is required":!phone?"phone number is required":!address.valid?"Address is required":"Click to process your shopping"}><button disabled={!address.valid||!name||!email} onClick={handlePay} class={`mt-4 mb-8 w-full rounded-md ${!address.valid||!name||!email?"bg-gray-400":"bg-gray-900"} px-6 py-3 font-medium text-white`}>Place Order</button></abbr> 
+    <abbr title={!email.valid?"valid email is Required":!name?"Name is required":!phone?"phone number is required":!address.valid?"Address is required":"Click to process your shopping"}><button disabled={!address.valid||!name||!email||!phone} onClick={handlePay} class={`mt-4 mb-8 w-full rounded-md ${!address.valid||!name||!email||!phone?"bg-gray-400":"bg-gray-900"} px-6 py-3 font-medium text-white`}>Place Order</button></abbr> 
   </div>
       </div>
     </div>

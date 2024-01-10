@@ -2,8 +2,9 @@
 
 import { useState } from "react";
 
-const Card = ({ val, deleteItem, cartData, setCartdata }) => {
+const   Card = ({ val, deleteItem, cartData, setCartdata }) => {
     const [count, setCount] = useState(val?.count);
+    const [showFull, setShowfull] = useState(false);
 
 
     // Increment=============> +
@@ -54,18 +55,30 @@ const Card = ({ val, deleteItem, cartData, setCartdata }) => {
       }
     };
   
+    const description=(des)=>{
+      if(showFull){
+        return des
+      }else{
+        return `${des?.slice(0,90)} ...`
+      }
+    }
+
+
     return (
       <div class="justify-between mb-6 rounded-lg bg-white p-6 shadow-md sm:flex sm:justify-start text-black">
+        <div className="flex gap-6">
         <img
           src={val?.image}
           alt="product-image"
-          class="w-full rounded-lg sm:w-40"
+          class="lg:w-80 w-[100px] h-[fit-content] rounded-lg sm:w-40"
         />
+         <h2 class="text-sm font-bold text-gray-900 lg:hidden block">{val?.name}</h2>
+        </div>
         <div class="sm:ml-4 sm:flex sm:w-full sm:justify-between gap-4">
           <div class="mt-5 sm:mt-0">
-            <h2 class="text-lg font-bold text-gray-900">{val?.name}</h2>
-            <p class="mt-1 text-sm text-gray-700 text-justify">
-              {val?.description}
+            <h2 class="text-lg font-bold text-gray-900 lg:block hidden">{val?.name}</h2>
+            <p class="cursor-pointer mt-1 lg:text-sm text-xs text-gray-700 text-justify lg:block ">
+              {description(val?.description)}<b onClick={()=>{setShowfull(!showFull)}} className="text-blue-500">{showFull?"show less":"Show full"}</b>
             </p>
           </div>
           <div class="mt-4 flex justify-between im sm:space-y-6 sm:mt-0 sm:block sm:space-x-6">
@@ -87,7 +100,7 @@ const Card = ({ val, deleteItem, cartData, setCartdata }) => {
               </span>
             </div>
             <div class="flex items-center space-x-4">
-              <p class="text-sm">${val?.price * count}</p>
+              <p class="text-sm">${val?.price?.toFixed() * count}</p>
               <svg
                 onClick={() => {
                   deleteItem(val);

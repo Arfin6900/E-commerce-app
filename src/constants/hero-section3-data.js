@@ -9,7 +9,7 @@ const categories=[
             // Price id's not found
             name:"ELIXIRS & JUICES 7.50 - Cacao Lion's Brew Elixir",
             image:item1,
-            description:"a decadent fusion that unites the rich allure of cacao with the bold essence of lion's mane, the warm embrace of cinnamon, and the invigorating kick of coffee. This luscious elixir is a symphony of flavors crafted to tantalize your taste buds and elevate your senses.",
+            description:"A decadent fusion that unites the rich allure of cacao with the bold essence of lion's mane, the warm embrace of cinnamon, and the invigorating kick of coffee. This luscious elixir is a symphony of flavors crafted to tantalize your taste buds and elevate your senses.",
             price:12,
             priceId:"price_1OT0xxBsvaxDJwymvEmk17xW",
             testPriceId:"price_1OVvDJBsvaxDJwymviMLcct2"
@@ -17,7 +17,7 @@ const categories=[
         {
             name:"Sunshine Elixir -",
             image:item2,
-            description:"a vibrant blend of Carrot, Orange, Ginger, and Turmeric. Crafted to awaken your taste buds and nourish your body, this golden elixir is a refreshing journey through the sun-kissed fields of wellness.",
+            description:"A vibrant blend of Carrot, Orange, Ginger, and Turmeric. Crafted to awaken your taste buds and nourish your body, this golden elixir is a refreshing journey through the sun-kissed fields of wellness.",
             price:15,
             priceId:"price_1OT0xxBsvaxDJwymvEmk17xW",
             testPriceId:"price_1OVvDJBsvaxDJwymviMLcct2"
@@ -25,7 +25,7 @@ const categories=[
         {
             // price id's not found
             name:"Green Vitality ", 
-            description:"a rejuvenating blend that harmonizes the crisp essence of celery, the verdant richness of spinach, the zesty kick of ginger, and the citrusy brightness of lemon. This invigorating elixir is a celebration of freshness, designed to refresh your palate and revitalize your senses",
+            description:"A rejuvenating blend that harmonizes the crisp essence of celery, the verdant richness of spinach, the zesty kick of ginger, and the citrusy brightness of lemon. This invigorating elixir is a celebration of freshness, designed to refresh your palate and revitalize your senses",
             price:22,
             image:item3,
             priceId:"price_1OVeaOBsvaxDJwymAp5ZJg8E",
@@ -34,7 +34,7 @@ const categories=[
         },
         {
             name:`"Green Zen Fusion,"`,
-            description:`a harmonious blend that marries the crisp essence of celery, the verdant richness of spinach, the invigorating allure of matcha, the zesty kick of ginger, and the citrusy brightness of lemon. This vibrant elixir, known as "Green Zen Fusion," is a celebration of freshness, meticulously crafted to refresh your palate and revitalize your senses.`,
+            description:`A harmonious blend that marries the crisp essence of celery, the verdant richness of spinach, the invigorating allure of matcha, the zesty kick of ginger, and the citrusy brightness of lemon. This vibrant elixir, known as "Green Zen Fusion," is a celebration of freshness, meticulously crafted to refresh your palate and revitalize your senses.`,
             price:22,
             image:item3,
             priceId:"price_1OVeaOBsvaxDJwymAp5ZJg8E",
@@ -43,7 +43,7 @@ const categories=[
         },
         {
             name:`"Love Beet Juice" –`,
-            description:`a tantalizing concoction that combines the earthy richness of beets with the zesty allure of lemon, the warming kick of ginger, and a hint of cayenne spice. This invigorating elixir is crafted to awaken your taste buds and nourish your body with a burst of wholesome goodness.`,
+            description:`A tantalizing concoction that combines the earthy richness of beets with the zesty allure of lemon, the warming kick of ginger, and a hint of cayenne spice. This invigorating elixir is crafted to awaken your taste buds and nourish your body with a burst of wholesome goodness.`,
             price:22,
             image:item4,
             priceId:"price_1OT0vSBsvaxDJwymKljaSsjF",
@@ -58,7 +58,7 @@ const categories=[
         items:[
          {
              name:`"Hulk Energy Balls" –`,
-             description:`" the powerhouse of natural vitality! Packed with the robust combination of matcha, flax, almonds, and sunflower seeds, these bite-sized wonders are your go-to snack for an instant energy boost`,
+             description:`The powerhouse of natural vitality! Packed with the robust combination of matcha, flax, almonds, and sunflower seeds, these bite-sized wonders are your go-to snack for an instant energy boost`,
              price:12,
              image:item6,
              priceId:"price_1OVejnBsvaxDJwymHtto7WOI",
@@ -76,7 +76,7 @@ const categories=[
          },
          {
              name:"Chocolate Chip Cookie Dough Bliss Balls",
-             description:"– a guilt-free indulgence that captures the nostalgic essence of cookie dough, while delivering a boost of wholesome goodness. These delectable bliss balls are crafted with a delightful blend of chocolate chips, flax, oat flour, sunflower butter, and walnuts, creating a heavenly treat that satisfies both your sweet cravings and your desire for nutritious snacking.",
+             description:"A guilt-free indulgence that captures the nostalgic essence of cookie dough, while delivering a boost of wholesome goodness. These delectable bliss balls are crafted with a delightful blend of chocolate chips, flax, oat flour, sunflower butter, and walnuts, creating a heavenly treat that satisfies both your sweet cravings and your desire for nutritious snacking.",
              price:22,
              image:item8,
              priceId:"price_1OVeg5BsvaxDJwymc0yLJYX9",

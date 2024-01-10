@@ -7,7 +7,7 @@ const Herosecton3 = () => {
   return (
     <div className="flex flex-col justify-center items-center w-[100vw]" style={{scrollBehavior:"smooth"}} id="items">
       {categories.map((val, index) => (
-        <Category item={val} hide={index == 1 ? true : false} />
+        <Category key={val.name} item={val} hide={index == 1 ? true : false} />
       ))}
       </div>
   );
