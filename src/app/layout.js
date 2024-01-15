@@ -16,7 +16,7 @@ export default function RootLayout({ children }) {
     <StoreProvider>
       <html lang="en">
         <head>
-        <link rel="icon" href="/favicon.ico" sizes="any"/>
+        <link rel="icon" href="/joqcafelogo.webp" sizes="any"/>
         </head>
         <body className={inter.className}>
           <Header />

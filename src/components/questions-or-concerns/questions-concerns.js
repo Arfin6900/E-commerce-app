@@ -1,17 +1,40 @@
 "use client";
 import React, { useState } from 'react';
+import emailjs from 'emailjs-com';
 
 const QuestionsOrConcerns = () => {
+  const isEmailSent=typeof window !== "undefined" && window.sessionStorage.getItem("contactEmail")
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
+  const [emailStatus, setEmailStatus] = useState(!!isEmailSent||false);
+  const [loading, setisLoading] = useState(false);
   // const [file, setFile] = useState(null);
 
   // const handleFileChange = (e) => {
   //   const selectedFile = e.target.files[0];
   //   setFile(selectedFile);
   // };
-
+  const sendEmail = async (templateParams) => {
+    setisLoading(true)
+    try {
+      const response = await emailjs.send(
+        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID,
+        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID_2,
+        templateParams,
+        process.env.NEXT_PUBLIC_EMAILJS_USER_ID
+      );
+      setisLoading(false)
+      setEmailStatus(true)
+      typeof window !== "undefined" && window.sessionStorage.setItem("contactEmail","true")
+      console.log('Email sent:', response);
+      return response;
+    } catch (error) {
+      setisLoading(false)
+      console.error('Error sending email:', error);
+      throw error;
+    }
+  };
   return (
     <div id='contact' class="flex items-center justify-center lg:p-12 p-3 w-full flex-col m-10 gap-20">
       <div>
@@ -23,11 +46,14 @@ const QuestionsOrConcerns = () => {
           class="py-6 px-9"
           onSubmit={(e) => {
             e.preventDefault();
-            // Use the state values (name, email, message, file) for further processing
-            console.log('Name:', name);
-            console.log('Email:', email);
-            console.log('Message:', message);
-            // console.log('File:', file);
+            const templateParams = {
+              name: name,
+              email: email,
+              message: message,
+             
+            };
+            console.log("🚀 ~ useEffect ~ templateParams:", templateParams);
+             sendEmail(templateParams);
           }}
           action="https://joqcafe.com"
           method="POST"
@@ -42,6 +68,7 @@ const QuestionsOrConcerns = () => {
             <input
               type="name"
               name="name"
+              required
               id="name"
               value={name}
               onChange={(e) => setName(e.target.value)}
@@ -57,6 +84,7 @@ const QuestionsOrConcerns = () => {
               Email:
             </label>
             <input
+              required
               type="email"
               name="email"
               id="email"
@@ -77,6 +105,7 @@ const QuestionsOrConcerns = () => {
               type="message"
               name="message"
               id="message"
+              required
               value={message}
               onChange={(e) => setMessage(e.target.value)}
               placeholder="a,b,c..."
@@ -156,7 +185,7 @@ const QuestionsOrConcerns = () => {
             <button
               class="hover:shadow-form w-full rounded-md bg-[black] py-3 px-8 text-center text-base font-semibold text-white outline-none"
             >
-              Send
+              {loading?"loading ...":emailStatus?"I have recieved your message :) .":"Send"}
             </button>
           </div>
         </form>
