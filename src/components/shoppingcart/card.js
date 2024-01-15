@@ -70,7 +70,7 @@ const   Card = ({ val, deleteItem, cartData, setCartdata }) => {
         <img
           src={val?.image}
           alt="product-image"
-          class="lg:w-80 w-[100px] h-[fit-content] rounded-lg sm:w-40"
+          class="lg:w-80 w-[100px] rounded-lg sm:w-40"
         />
          <h2 class="text-sm font-bold text-gray-900 lg:hidden block">{val?.name}</h2>
         </div>

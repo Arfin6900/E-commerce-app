@@ -20,7 +20,6 @@ const Paymentsuccess = () => {
     const user_=typeof window !== "undefined" && window.localStorage.getItem("userInfo")
     const user=JSON.parse(user_)
    const paymentDone=typeof window !== "undefined" && window.localStorage.getItem("payment")
-    console.log("🚀 ~ Paymentsuccess ~ paymentDone:", paymentDone)
     const cleanupFunction = () => {
             typeof window !== "undefined" && localStorage.removeItem("cartData");
             typeof window !== "undefined" &&  localStorage.removeItem("payment");
@@ -29,7 +28,7 @@ const Paymentsuccess = () => {
 
     useEffect(() => {
     
-      if (false) {
+      if (!paymentDone) {
         navigate.back();
       } else {
         console.log("previous url is: " + document.referrer);
@@ -44,7 +43,7 @@ const Paymentsuccess = () => {
                 total: user?.total,
               };
               console.log("🚀 ~ useEffect ~ templateParams:", templateParams);
-              //  sendEmail(templateParams);
+               sendEmail(templateParams);
               console.log("email sent successfully");
             } catch (error) {
               // Handle errors
