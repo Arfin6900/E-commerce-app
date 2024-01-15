@@ -41,7 +41,7 @@ const Header = () => {
       <NavigationDrawer />
       <div    style={{
           background:"white",
-              width:"100vw",
+              width:"100%",
               position:"fixed",
               zIndex:20
         }} class="bg-white hidden lg:block ">

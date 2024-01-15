@@ -113,7 +113,7 @@ const Category = ({ hide, item }) => {
           <h1 className="text-2xl text-bold text-black text-center">
             {item.name}
           </h1>
-          <p className="text-large text-bold text-black text-center">
+          <p className="lg:text-lg text-sm text-bold text-black text-center">
             {item.description}
           </p>
         </div>

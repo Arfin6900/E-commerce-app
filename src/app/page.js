@@ -9,7 +9,7 @@ import Image from 'next/image'
 
 export default function Home() {
   return (
-    <main className="flex bg-white min-h-screen flex-col items-center lg:pt-0 pt-[15%] " style={{scrollBehavior:"smooth"}}> 
+    <main className="flex bg-white min-h-screen flex-col items-center lg:pt-0 pt-[15%] " style={{scrollBehavior:"smooth",overflowX:"hidden"}}> 
      <Hero />
      <Herosection2 />
      <Herosecton3 />
