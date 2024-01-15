@@ -89,23 +89,23 @@ const Navigation = ({ isOpen, toggleDrawer }) => {
       </div>
       <div className="drawer-content-data">
         {navContents.map((val) => (
-          <NavitemLevel1 val={val} />
+          <NavitemLevel1 toggleDrawer={toggleDrawer} val={val} />
         ))}
       </div>
     </div>
   );
 };
 
-const NavitemLevel1 = ({ val }) => {
+const NavitemLevel1 = ({ val,toggleDrawer }) => {
   const [open, setOpen] = useState(false);
 
   return (
     <>
-      <Navitem item={val} setOpen={setOpen} open={open} />
+      <Navitem toggleDrawer={toggleDrawer} item={val} setOpen={setOpen} open={open} />
     </>
   );
 };
-const Navitem = ({ item,setOpen }) => {
+const Navitem = ({ item,setOpen,toggleDrawer}) => {
   const cart_data_from_storage =( typeof window !== "undefined" &&JSON.parse(window.localStorage.getItem("cartData") )) || [];
   const lenght_of_items =  cart_data_from_storage?.filter((val)=>(val?.count))?.length
   const items = useSelector(state => state.cart.items);
@@ -117,7 +117,7 @@ const Navitem = ({ item,setOpen }) => {
         justifyContent: "space-between",
         alignItems: "center",
       }}
-      onClick={()=>{setOpen(prev=>!prev)}}
+      onClick={toggleDrawer}
     >
       <div style={{ fontSize: "1.5rem", color: "black" }}>
         {item.name}
