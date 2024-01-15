@@ -11,7 +11,7 @@ const Card = ({val}) => {
         }}
       >
         <img
-          class=""
+          class="lg:w-auto w-[80%]"
           src={val.img}
           style={{borderRadius:"50%"}}
         />

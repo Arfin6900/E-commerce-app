@@ -21,7 +21,7 @@ const Card = ({ val, addToCart, increment, decrement }) => {
                   <img src={val.image} className="lg:w-40 w-[100px]" />
                   <div className="flex flex-col">
                       <p class="text-neutral-800 lg:text-lg font-semibold">{val.name}</p>
-                      <p class="mt-1 text-xs text-sm text-gray-700 text-justify lg:hidden block">
+                      <p class="mt-1 text-xs text-sm text-gray-700 text-start lg:hidden block">
                          {description(val?.description)}<b onClick={()=>{setShowfull(!showFull)}} className="text-blue-500">{showFull?"show less":"Show full"}</b>
                      </p>
                   </div>

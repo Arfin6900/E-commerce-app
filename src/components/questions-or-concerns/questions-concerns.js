@@ -5,16 +5,15 @@ const QuestionsOrConcerns = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
-  const [file, setFile] = useState(null);
-  console.log("🚀 ~ QuestionsOrConcerns ~ file:", file)
+  // const [file, setFile] = useState(null);
 
-  const handleFileChange = (e) => {
-    const selectedFile = e.target.files[0];
-    setFile(selectedFile);
-  };
+  // const handleFileChange = (e) => {
+  //   const selectedFile = e.target.files[0];
+  //   setFile(selectedFile);
+  // };
 
   return (
-    <div class="flex items-center justify-center lg:p-12 p-3 w-full flex-col m-10 gap-20">
+    <div id='contact' class="flex items-center justify-center lg:p-12 p-3 w-full flex-col m-10 gap-20">
       <div>
         <h1 className='text-black text-4xl text-bold text-center'>Questions or Concerns?</h1>
         <h1 className='text-black text-2xl text-bold text-center'>Drop us a line !</h1>
@@ -28,7 +27,7 @@ const QuestionsOrConcerns = () => {
             console.log('Name:', name);
             console.log('Email:', email);
             console.log('Message:', message);
-            console.log('File:', file);
+            // console.log('File:', file);
           }}
           action="https://joqcafe.com"
           method="POST"
@@ -85,7 +84,7 @@ const QuestionsOrConcerns = () => {
             />
           </div>
 
-          <div class="mb-6 pt-4">
+          {/* <div class="mb-6 pt-4">
             <label class="mb-5 block text-xl font-semibold text-[#07074D]">
               Upload File
             </label>
@@ -151,7 +150,7 @@ const QuestionsOrConcerns = () => {
               </div>
             )}
 
-          </div>
+          </div> */}
 
           <div>
             <button

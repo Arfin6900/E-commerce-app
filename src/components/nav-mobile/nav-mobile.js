@@ -105,22 +105,23 @@ const NavitemLevel1 = ({ val }) => {
     </>
   );
 };
-const Navitem = ({ item }) => {
+const Navitem = ({ item,setOpen }) => {
   const cart_data_from_storage =( typeof window !== "undefined" &&JSON.parse(window.localStorage.getItem("cartData") )) || [];
   const lenght_of_items =  cart_data_from_storage?.filter((val)=>(val?.count))?.length
   const items = useSelector(state => state.cart.items);
   const cartLenght = items.filter((val)=>(val?.count))?.length||lenght_of_items
   return (
-    <div
+    <a href={item.route}
       style={{
         display: "flex",
         justifyContent: "space-between",
         alignItems: "center",
       }}
+      onClick={()=>{setOpen(prev=>!prev)}}
     >
-      <a href={item.route} style={{ fontSize: "1.5rem", color: "black" }}>
+      <div style={{ fontSize: "1.5rem", color: "black" }}>
         {item.name}
-      </a>
+      </div>
      {item.name=="Cart"?<div class="relative">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -134,7 +135,7 @@ const Navitem = ({ item }) => {
          {cartLenght||0}
         </span>
       </div>:null}
-    </div>
+    </a>
   );
 };
 export default NavigationDrawer;

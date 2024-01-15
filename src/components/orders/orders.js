@@ -20,7 +20,7 @@ const Orders = () => {
           <p className="text-large">Status:</p>
           <img src={done} className="w-[30px]" />
           </div>
-          <p className="text-large">Payment completed successfully</p>
+          <p className="lg:text-lg text-sm m-3">Payment completed successfully</p>
         </div>
         <div className="flex items-center gap-3 lg:justify-start justify-center">
           <p className="text-large">Order number:</p>
@@ -29,7 +29,7 @@ const Orders = () => {
         </div>
       </section>
       <section
-        className="w-full flex lg:flex-col  min-h-[52vh] max-h-[70vh] mt-10 bg-white rounded-xl shadow-md p-6 pt-20 relative flex-col lg:overflow-auto overflow-hidden"
+        className="w-full flex lg:flex-col   max-h-[70vh] mt-10 bg-white rounded-xl shadow-md p-6 pt-20 relative flex-col lg:overflow-auto overflow-auto"
         style={{ boxShadow: "inset 0px -4px 11px 0px #ece9e9" }}
       >
         <p className="text-large text-gray-800 absolute top-4 left-4 font-800">

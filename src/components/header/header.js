@@ -78,7 +78,7 @@ const Header = () => {
                 <span class="text-sm font-medium text-black">Orders</span>
               </a>
 
-              <div class="flex cursor-pointer items-center gap-x-1 rounded-md py-2 px-4 hover:bg-gray-100">
+              {/* <div class="flex cursor-pointer items-center gap-x-1 rounded-md py-2 px-4 hover:bg-gray-100">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   class="h-5 w-5 text-gray-500"
@@ -92,7 +92,7 @@ const Header = () => {
                   />
                 </svg>
                 <span class="text-sm font-medium text-black">Favorites</span>
-              </div>
+              </div> */}
 
              {pathName!=="cart"?<div class="flex cursor-pointer items-center gap-x-1 rounded-md py-2 px-4 hover:bg-gray-100">
                 <div class="relative">

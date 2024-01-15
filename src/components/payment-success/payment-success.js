@@ -19,32 +19,41 @@ const Paymentsuccess = () => {
     const navigate=useRouter()
     const user_=typeof window !== "undefined" && window.localStorage.getItem("userInfo")
     const user=JSON.parse(user_)
-    useEffect(()=>{
-       if(!user){
-        navigate.back()
-       }else{
-        console.log("previous url is: " + document.referrer);
-        try {
-            const templateParams = {
-              name: user?.name,
-              email: user?.email,
-              phoneNumber: user?.phoneNumber,
-              address:user?.address,
-              date:formatDate(currentDate),
-              items:cart_data_from_storage?.filter((val)=>(val?.count))?.length,
-              total:user?.total
+   const paymentDone=typeof window !== "undefined" && window.localStorage.getItem("payment")
+    console.log("🚀 ~ Paymentsuccess ~ paymentDone:", paymentDone)
+    const cleanupFunction = () => {
+            typeof window !== "undefined" && localStorage.removeItem("cartData");
+            typeof window !== "undefined" &&  localStorage.removeItem("payment");
+            typeof window !== "undefined" &&  localStorage.removeItem("userInfo");
+         };
 
-            };
-            console.log("🚀 ~ useEffect ~ templateParams:", templateParams)
-            //  sendEmail(templateParams);
-             localStorage.removeItem("userInfo")
-             localStorage.removeItem("cartData")
-             console.log("email sent successfull ")
-          } catch (error) {
-            // Handle errors
-          }
-       }
-    },[])
+    useEffect(() => {
+    
+      if (false) {
+        navigate.back();
+      } else {
+        console.log("previous url is: " + document.referrer);
+            try {
+              const templateParams = {
+                name: user?.name,
+                email: user?.email,
+                phoneNumber: user?.phoneNumber,
+                address: user?.address,
+                date: formatDate(currentDate),
+                items: cart_data_from_storage?.filter((val) => val?.count)?.length,
+                total: user?.total,
+              };
+              console.log("🚀 ~ useEffect ~ templateParams:", templateParams);
+              //  sendEmail(templateParams);
+              console.log("email sent successfully");
+            } catch (error) {
+              // Handle errors
+            }
+      }
+      return ()=>{cleanupFunction()}
+  
+       // This will be called when the component unmounts or when the effect dependencies change
+    }, []);
   return (
     <div class="bg-gray-100 h-screen">
     <div class="bg-white p-6  md:mx-auto">
@@ -58,7 +67,7 @@ const Paymentsuccess = () => {
           <p class="text-gray-600 my-2">Thank you <b>{user?.name}</b> for completing your secure online payment.</p>
           <p> Have a great day!  </p>
           <div class="py-10 text-center cursor-pointer">
-              <a onClick={()=>{navigate.push('/')}} class="px-12 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold py-3">
+              <a onClick={()=>{cleanupFunction();navigate.push('/')}} class="px-12 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold py-3">
                   GO BACK 
              </a>
           </div>

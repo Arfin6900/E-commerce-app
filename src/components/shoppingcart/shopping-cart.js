@@ -41,6 +41,7 @@ const ShoppingCart = () => {
          setisLoading(true)
          const successUrl = `${window?.location.origin}/payment-success`;
          const cancelUrl = `${window?.location.origin}/payment-failure`; 
+         let doneItems=cartData?.filter((val) => val?.count)
       // const stripe = await loadStripe("pk_test_TYooMQauvdEDq54NiTphI7jx");
       const stripe = await loadStripe(!isDevelopement?process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY_TEST:process?.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY_LIVE);
       console.log("🚀 ~ file: shopping-cart.js:31 ~ handlePay ~ stripe:", stripe);
@@ -53,6 +54,9 @@ const ShoppingCart = () => {
         total:`${subTotal?subTotal - 1 + 5+.98:`0`} USD`
       }
       typeof window !== "undefined" && window?.localStorage.setItem("userInfo",JSON.stringify(user))
+      typeof window !== "undefined" && window.localStorage.setItem("payment","true")
+      typeof window !== "undefined" && window.localStorage.setItem("doneItems",JSON.stringify(doneItems))
+
       const { error } = await stripe.redirectToCheckout({
           lineItems: lineItems,
           successUrl:successUrl,

@@ -1,6 +1,11 @@
-import React from 'react'
+"use client"
+import React, { useEffect } from 'react'
 
 const Paymentfailure = () => {
+  useEffect(()=>{
+    typeof window !== "undefined" && window.localStorage.removeItem("payment")
+    typeof window !== "undefined" && window.localStorage.removeItem("doneItems")
+  },[])
   return (
     <div class="bg-gray-100 h-screen">
     <div class="bg-white p-6  md:mx-auto">

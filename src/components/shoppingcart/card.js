@@ -77,7 +77,7 @@ const   Card = ({ val, deleteItem, cartData, setCartdata }) => {
         <div class="sm:ml-4 sm:flex sm:w-full sm:justify-between gap-4">
           <div class="mt-5 sm:mt-0">
             <h2 class="text-lg font-bold text-gray-900 lg:block hidden">{val?.name}</h2>
-            <p class="cursor-pointer mt-1 lg:text-sm text-xs text-gray-700 text-justify lg:block ">
+            <p class="cursor-pointer mt-1 lg:text-sm text-xs text-gray-700 text-start lg:text-justify  lg:block ">
               {description(val?.description)}<b onClick={()=>{setShowfull(!showFull)}} className="text-blue-500">{showFull?"show less":"Show full"}</b>
             </p>
           </div>
