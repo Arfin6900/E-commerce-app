@@ -16,15 +16,12 @@ const ShoppingCart = () => {
   const [phone, setPhone] = useState('');
   const [isLoading, setisLoading] = useState(false);
   const [address, setAddress] = useState({streetAddr:'',state:US_States[0],zipCode:'',valid:false});
-  console.log("🚀 ~ file: shopping-cart.js:17 ~ ShoppingCart ~ address:", address)
-
   const isDevelopement=process.env.NEXT_PUBLIC_ENV=="PRODUCTION"?true:false
   
 
 
   const lineItems = cartData.filter((val=>val.count))?.map((val2)=>({ price:isDevelopement ? val2?.priceId : val2?.testPriceId , quantity:val2?.count }))
   const isItem = cartData.filter((val=>val.count))?.length
-  console.log("🚀 ~ file: shopping-cart.js:17 ~ ShoppingCart ~ lineItems:", lineItems)
   const subTotal = cartData
     ?.filter((item) => item.count)
     ?.reduce((total, item) => total + item.price * item.count, 0);
@@ -44,7 +41,6 @@ const ShoppingCart = () => {
          let doneItems=cartData?.filter((val) => val?.count)
       // const stripe = await loadStripe("pk_test_TYooMQauvdEDq54NiTphI7jx");
       const stripe = await loadStripe(!isDevelopement?process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY_TEST:process?.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY_LIVE);
-      console.log("🚀 ~ file: shopping-cart.js:31 ~ handlePay ~ stripe:", stripe);
       stripe.check
       const user={
         name:name,
